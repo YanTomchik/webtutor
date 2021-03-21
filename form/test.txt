@@ -1,0 +1,3 @@
+<div colid="<%=user.id%>" class="user"><%=user.fullname%></div>
+
+tools.create_notification('CodeMsg', UserID, ExtraString(для доп инфы));

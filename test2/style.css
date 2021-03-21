@@ -1,0 +1,31 @@
+body{
+    background-color: #2E8B57;
+    color: #FFFFFF;
+    margin: 0px;
+    padding: 0px;
+}
+
+.test_wrapper{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 200px;
+}
+
+.btn{
+    background-color: red;
+    color: white;
+    width: 100px;
+    height: 80px;
+    margin: 0px;
+    padding: 0px;
+}
+
+.text{
+    width: 500px;
+    height: 80px;
+}
+.wrapper_button{
+    display: block;
+}
+

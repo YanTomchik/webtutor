@@ -1,0 +1,295 @@
+<% 
+
+/*
+	Разработано для WebTutor
+	тестовое задание для Мостра-групп
+	ИС Гринчик Д.А.
+	2020 год
+ */
+ 	/* ПУБЛИЧНЫЕ ПЕРЕМЕННЫЕ */
+ 	aMainAjaxLink = "/dgrin/mostra_group.html";
+ 	aMostraGroupColor_main = "#3C4D5A";
+ 	aMostraGroupColor_secondary = "#F76F01";
+
+ 	aMENU_ARRAY = [];
+ 		aMENU_ARRAY.push({'name':'Решение', 'rt':'AJAX_1'});
+ 		aMENU_ARRAY.push({'name':'Сохраненные данные', 'rt':'AJAX_2'});
+ 		aMENU_ARRAY.push({'name':'Дополнительная информация', 'rt':'AJAX_3'});
+
+/* Определение типа рендера страницы, чтобы подгрузить определенный участок кода */
+try { Render_Type = Request.Query.render_type+""; } catch(no) { Render_Type=""; }
+
+/*	Рендер главного фрейма	*/
+if (Render_Type=="") {
+%>
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" lang="ru">
+    <script src="jquery.js"></script>
+    <title>DGrinchik project</title>
+    <style>
+		@font-face {  font-family: Mostra; src: url(src/18644.ttf); }
+		@font-face {  font-family: Mostra_Light; src: url(src/19219.ttf); }
+
+		body { margin:0px; padding:0px; background-color:#eee;}
+
+	/* BLOCKS */
+		#MG_MAIN_CONTAINER { position:relative; z-index: 0; }
+		#MG_LOADING_SCREEN span { font-family: Mostra; color:<%=aMostraGroupColor_main%>; font-size:20px; }
+		.HEAD_TITLE_LINE { text-align: left; box-shadow:0 0 10px rgba(0,0,0,0.5); background:#fff; }
+
+		.HELP_DESK { display:none; font-family: Mostra_Light; color:<%=aMostraGroupColor_main%>; padding:50px; }
+		.HELP_DESK div { padding:20px; border-radius: 10px; background:<%=aMostraGroupColor_main%>; color:#fff; }
+			.HELP_DESK.PC { display:block; }
+			.HELP_DESK.MOBILE { display:none; }
+
+		/* Menu */
+		.Mob_MENU_BTN { display:none; width:60px; height:60px; font-size:40px; color:<%=aMostraGroupColor_main%>;  }
+		.MENU_BTNS_PC { display:inline-block; height:60px; float:right;}
+			.MENU_BTNS_PC table { border-collapse: collapse; border-spacing: 0px; height:55px; }
+			.MENU_BTNS_PC td { height:55px; vertical-align: middle; padding:0px 20px 0px 20px; font-size:20px;}
+		.MENU_BTN { display:inline-block; cursor:pointer; font-family: Mostra; color:<%=aMostraGroupColor_main%>; float:left; }
+			.MENU_BTN:hover { color:<%=aMostraGroupColor_secondary%>; }
+
+		/* Injected containers */
+		.INJECTED_DESK_BLOCK { font-family: Mostra_Light; color:<%=aMostraGroupColor_main%>; padding:50px; }
+		.INJECTED_DESK_BLOCK .IDB_IN { padding:20px; border-radius: 10px; background:<%=aMostraGroupColor_main%>; color:#fff; }
+
+		.IDB_TABLE { border-collapse: collapse; color:<%=aMostraGroupColor_main%>; width:100% ;}
+			.IDB_TABLE tr td:first-child { text-align: right; padding:5px 8px 5px 0px; width:200px;}
+			.IDB_TABLE tr td:first-child+* { text-align: left; padding:5px 0px 5px 0px; }
+
+	/* IMGS */
+		.LOGO_IMG_MAIN {  width:40%;  }
+		.LOGO_LITTLE { width:200px; }
+		.LOGO_LITTLE_MOB { display:none; height:60px; }
+
+	/* Mobile */
+		@media (max-width: 900px) {
+			.LOGO_IMG_MAIN {width:80%;}
+			#MG_LOADING_SCREEN span { font-size:18pt; }
+			.HEAD_TITLE_LINE { text-align: center; height:60px; }
+
+			.LOGO_LITTLE { display:none; }
+			.LOGO_LITTLE_MOB { display:inline-block; }
+
+			/* Menu */
+			.MENU_BTNS_PC { display:none; }
+			.Mob_MENU_BTN { display:inline-block; float:left; }
+			.Mob_MENU_BTN:active { background-color:<%=aMostraGroupColor_secondary%>; color:#fff; }
+
+			.HELP_DESK.PC { display:none; }
+			.HELP_DESK.MOBILE { display:block; }
+		}
+	</style>
+</head>
+<body>    
+<div id="MG_LOADING_SCREEN" style="position:fixed; top:0px; left:0px; width:100%; height:100%; z-index:10; background:#fff;">
+	<table style="position:absolute; top:0px; left:0px; width:100%; height:100%; border-collapse:collapse;"><tr><td style="vertical-align: middle; text-align: center; width:100%; height:100%;">
+	<img class="LOGO_IMG_MAIN" src="src/main_logo_mg.png" style=" margin:20px;"/><br>
+	<span>ЗАГРУЗКА...</span>
+</td></tr></table>
+</div>
+<%
+	aHELLOWORD_FromGrinchik = "Доброго времени суток! :)<br><br>Предоставляю Вашему вниманию простое Single-Page-приложение для сохранения информации в Базу Данных WebTutor.";
+%>
+	<div id="MG_MAIN_CONTAINER">
+
+		<div class="HEAD_TITLE_LINE">
+			<img class="LOGO_LITTLE" src="src/main_logo_mg.png"/>
+			<img class="LOGO_LITTLE_MOB" src="src/main_logo_mg.png"/">
+			<div class="Mob_MENU_BTN">&#9776;</div>
+			<div class="MENU_BTNS_PC">
+			<%
+			for (btn in aMENU_ARRAY) {
+				_BTN_NAME_ = btn.name;
+				_BTN_RT_ = btn.rt;
+			%>
+				<div class="MENU_BTN PC_VIEW" onclick="_OpenFrameByAJAX_('INJECT_CONTAINER', '<%=_BTN_RT_%>', true)";>
+					<table><tr><td><%=_BTN_NAME_%></td></tr></table>
+				</div>
+			<%}%>
+			</div>
+		</div>
+
+		<div class="CONTENT_LINE">
+			<div id="INJECT_CONTAINER">
+				<div class="HELP_DESK PC" style="" >
+					<div>
+						<%=aHELLOWORD_FromGrinchik%>
+						<br><br><br>
+						Чтобы приступить к работе выберите необходимый Вам пункт меню в верхней части страницы.
+					</div>
+				</div>
+				<div class="HELP_DESK MOBILE" style="">
+					<div>
+						<%=aHELLOWORD_FromGrinchik%>
+						<br><br><br>
+						Чтобы приступить к работе выберите необходимый Вам пункт меню.<br><br>
+						Для этого нажмите на пиктограмму &#9776; в верхнем левом углу.
+					</div>
+				</div>
+			</div>
+			<div id="INJECT_CONTAINER_INVISIBLE" style="display: none;"></div>
+		</div>
+
+	</div>
+
+	<!-- <script src="https://penekjd.github.io/src/mostra_g.js"></script> -->
+	<script>	/* onclick="_OpenFrameByAJAX_('INJECT_CONTAINER', 'AJAX_1', true);	*/
+		window.onload = function() {
+			var _MAIN_LOAD_FRAME_ = document.getElementById("MG_LOADING_SCREEN");
+			$(_MAIN_LOAD_FRAME_).fadeOut(300);
+		}
+
+		function _OpenFrameByAJAX_(inject_div_id, render_type, current_link, extra_string) {
+			var _CURRENT_URL_ = "<%=aMainAjaxLink%>";
+			if (current_link) {
+				var _CURRENT_URL_ = window.location.href;
+			}
+			var INJECT_DIV = document.getElementById(inject_div_id);
+			var SEND_OBJ = {};
+				SEND_OBJ.render_type = render_type;
+			if (extra_string!="" && extra_string!=null && extra_string!=undefined) {
+				SEND_OBJ.extra_string = extra_string;
+			}
+			$.ajax({
+				url: _CURRENT_URL_,
+				data: SEND_OBJ,
+				type: 'post',
+				success: function(response) {
+					$(INJECT_DIV).html(response);
+				}
+			});
+		}
+	</script>
+</body>
+</html>
+<%
+}
+
+
+
+/* Рендер первого АЯКС-запроса */
+if (Render_Type=="AJAX_1") {
+%>
+<div class="INJECTED_DESK_BLOCK" style="">
+	<div class="IDB_IN">
+		Данные будут сохранены в "Комментариях к документу" (Раздел "Портал")
+		<div style="background:#fff; padding:8px; border-radius: 8px;">
+			<table class="IDB_TABLE" id="DATA_TO_DB">
+				<tr>
+					<td>Как Ваше имя?</td>
+					<td><textarea style="width:100%; height:50px;"></textarea></td>
+				</tr>
+				<tr>
+					<td>Как вы относитесь к бутербродам с сыром?</td>
+					<td><textarea style="width:100%; height:50px;"></textarea></td>
+				</tr>
+				<tr>
+					<td>Кто первым вышел в открытый космос?</td>
+					<td><textarea style="width:100%; height:50px;"></textarea></td>
+				</tr>
+			</table>
+		</div>
+		<div align="center"><input type="button" onclick="_SAVE_DATA_();" value="Сохранить"/></div>
+	</div>
+</div>
+<script type="text/javascript">
+	function _SAVE_DATA_() {
+		var EXTRA_STRING = "";
+		var _ParseAllArray_ = document.getElementById("DATA_TO_DB").getElementsByTagName("tr");
+		for (a = 0; a < _ParseAllArray_.length; a++) {
+			_TR_ = _ParseAllArray_[a];
+				_QST_ = _TR_.getElementsByTagName("td")[0].innerHTML;
+				_ANSWR_ = _TR_.getElementsByTagName("textarea")[0].value;
+				EXTRA_STRING += _QST_+"***"+_ANSWR_;
+				if (a!=(_ParseAllArray_.length-1)) { EXTRA_STRING+="+++"; }
+		}
+		_OpenFrameByAJAX_('INJECT_CONTAINER_INVISIBLE', 'SAVE_DB', true, EXTRA_STRING);
+	}
+</script>
+<%
+}
+
+if (Render_Type=="AJAX_2") {
+	_COUNT_ = 0;
+	_CheckSaved_ = XQuery("for $elem in blog_entry_comments where $elem/object_name='jd_node' return $elem");
+	for (AAA in _CheckSaved_) { _COUNT_++; }
+%>
+<div class="INJECTED_DESK_BLOCK" style="">
+	<div class="IDB_IN">
+	<% if (_COUNT_>0) {
+		for (obj in _CheckSaved_) {
+			_DOC_ID_ = obj.id;
+			XMLDOC = OpenDoc(UrlFromDocID(_DOC_ID_));
+				try { QST = XMLDOC.TopElem.name; } catch(no) { QST = ""; }
+			ANSWR = obj.message;
+	%>
+		<div style="padding:5px;">
+			<b><%=QST%>:</b>
+			<div style="padding:5px;"><%=ANSWR%></div>
+		</div>
+	<%	}
+	}else{%>
+		Вы еще не сохранили данные!
+	<%}%>
+	</div>
+</div>
+<%
+}
+
+
+
+
+if (Render_Type=="AJAX_3") {
+%>
+<div class="INJECTED_DESK_BLOCK" style="">
+	<div class="IDB_IN">
+		Тестовое задание
+		<br>
+		<b>ИС Гринчик Дмитрий 2020</b>
+		<br>
+		Для Мостра-групп
+		<br><br>
+		Откройте вкладку "Решение" и введите данные, после чего нажмите кнопку "Сохранить".
+		<br><br>
+		Сохраненные данные можно посмотреть нажав на вкладку "Сохраненные данные"
+
+	</div>
+</div>
+<%
+}
+
+
+
+
+
+/* Рендер первого АЯКС-запроса */
+if (Render_Type=="SAVE_DB") {
+	try { EXTRA_STRING = Request.Query.extra_string+""; } catch(no) { EXTRA_STRING=""; }
+
+	function SAVE_RESULT(_name_, _msg_) {
+		_NEWDOC_ = OpenNewDoc('x-local://wtv/wtv_blog_entry_comment.xmd');
+			_NEWDOC_.TopElem.object_name = 'jd_node';
+			_NEWDOC_.TopElem.name = _name_;
+			_NEWDOC_.TopElem.message = _msg_;
+		_NEWDOC_.BindToDb(DefaultDb);
+		_NEWDOC_.Save();
+	}
+
+	QUESTIONS_ARR = EXTRA_STRING.split("+++");
+	for (AAA in QUESTIONS_ARR) {
+		QST_ANSWR = AAA+"";
+		QST_ANSWR = QST_ANSWR.split("***");
+			QST = QST_ANSWR[0];
+			ANSWR = QST_ANSWR[1];
+			SAVE_RESULT(QST, ANSWR);
+	}
+%>
+<script>
+	alert("Данные были сохранены!");
+</script>
+<%}%>

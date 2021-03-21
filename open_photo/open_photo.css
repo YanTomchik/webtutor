@@ -1,0 +1,30 @@
+body{
+    background-color: #3a3a3a;
+}
+
+.header{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color:#FFFFFF;
+    margin-bottom: 25px;
+}
+.wrapper{
+    color:#FFFFFF;
+    font-weight: normal;
+    font-size: 20px;
+    display: flex;
+    justify-content: center;
+}
+
+.photo_wrapper{
+    margin-bottom: 5px;
+
+}
+
+.photo{
+    color: #2E8B11;
+    font-size: 24px;
+    font-weight: bold;
+
+}

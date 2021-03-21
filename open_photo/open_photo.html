@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+<div class = "header">
+    <h1>Group</h1>
+</div>
+<div class="wrapper">
+
+    <div class="photo_wrapper">
+        <%
+        for(DOC in XQuery("for $elem in documents return $elem"))
+        {
+        try
+        {
+        documentDoc=OpenDoc(UrlFromDocID(DOC.id)).TopElem
+        }
+        catch(err)
+        {
+        continue;
+        }
+        if(documentDoc.resource_id.HasValue)
+        {
+        %>
+        <div class="photo">
+            <img src="/download_file.html?file_id=<%=documentDoc.resource_id%>">
+        </div>
+        <%}
+        }
+        %>
+    </div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="style.css">
+    <script type="text/javascript" src="../scripts/jquery.js"></script>
+    <title>User</title>
+</head>
+<body>
+<div class="wrapper">
+    <div class="test_wrapper">
+        <%
+        array_of_users = XQuery("for $elem in collaborators return $elem");
+
+        for (user in array_of_users) {
+        alert(user.id)
+        %>
+            <input type="text" class="text" textid="<%=user.id%>"> </input>
+            <input class="btn" type="button" id="btn" value="ввод">
+        <%}%>
+    </div>
+
+
+</div>
+<script src = "script.js"></script>
+</body>
+</html>

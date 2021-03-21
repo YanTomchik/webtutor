@@ -1,0 +1,41 @@
+<%
+TextID = Request.Query.text;
+
+Name = XQuery("for $elem in collaborators where (contains($elem/fullname, '"+TextID+"'))  return $elem");
+
+for (user in Name) {
+    if (user.fullname == "Томчик Ян Михайлович") {
+%>
+<script>
+    alert('HELLO!')
+</script>
+<%
+    }
+%>
+<%=user.fullname%>
+<%
+}
+
+%>
+<%=Name%>
+
+
+
+
+<!--<%-->
+<!--TextID = Request.Query.text;-->
+
+<!--REQUEST = "for $elem in collaborators where (contains($elem/fullname, '"+TextID+"'))  return $elem";-->
+<!--FirstArrayElem = ArrayOptFirstElem(XQuery(REQUEST));-->
+<!--%>-->
+<!--<div><%=FirstArrayElem%></div>-->
+<!--<%-->
+<!--Name = XQuery(REQUEST);-->
+<!--for (user in Name) {-->
+<!--%>-->
+<!--<%=user.fullname%>-->
+<!--<%-->
+<!--}-->
+
+<!--%>-->
+<!--<%=Name%>-->

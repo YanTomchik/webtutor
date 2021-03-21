@@ -1,0 +1,14 @@
+<%
+TextID = Request.Query.leaderid;
+
+REQUEST = "for $elem in collaborators where (contains($elem/fullname, '"+TextID+"'))  return $elem";
+FirstArrayElem = ArrayOptFirstElem(XQuery(REQUEST));
+Name = XQuery(REQUEST);
+for (user in Name) {
+%>
+<div colid="<%=user.id%>"><%=user.fullname%></div>
+<%
+}
+
+%>
+<%=Name%>

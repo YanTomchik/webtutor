@@ -1,0 +1,13 @@
+<%
+TextID = Request.Query.text;
+
+Name = XQuery("for $elem in collaborators where ( (containts($elem/fullname, '"+TextID+"') ) return $elem");
+
+for (user in Name) {
+%>
+<%=user.fullname%>
+<%
+}
+
+%>
+<%=Name%>

@@ -1,0 +1,32 @@
+body{
+    background-color: #2E8B57;
+    color: #FFFFFF;
+}
+
+button{
+    background-color: red;
+    color: #FFFFFF;
+    width: 100px;
+    height: 80px;
+}
+
+input{
+    width: 500px;
+    height: 80px;
+    font-size: 30px;
+}
+
+.wrapper{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 200px;
+}
+
+.result{
+    font-size: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+}

@@ -1,0 +1,19 @@
+<%
+/*GroupID = Request.Query.groupid;*/
+UserID = Request.Query.userid;
+Members = XQuery("for $elem in groups return $elem");
+
+for (group in Members) {
+
+    XMLDoc = OpenDoc(UrlFromDocID(group.id));
+    XMLDoc.TopElem.collaborators.ObtainChildByKey(UserID);
+    XMLDoc.Save();
+
+    /*
+    NewDoc = OpenNewDoc("x-local://wtv/");
+    */
+
+    //DeleteDoc(UrlFromDocID(user.id))
+}
+%>
+<script>console.log("Data was saved!");</script>

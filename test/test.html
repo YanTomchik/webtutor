@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Test</title>
+    <link rel="stylesheet" href="style.css">
+    <script type="text/javascript" src="../scripts/jquery.js"></script>
+</head>
+<body>
+<div class = "header">
+    <h1>Test Document</h1>
+</div>
+
+<div class="wrapper">
+
+    <div class="users_wrapper">
+        <%
+        array_of_users = XQuery("for $elem in collaborators return $elem");
+
+        for (user in array_of_users) {
+        %>
+        <div class="users">
+            <div id="user">
+            <span class="description">
+                name:
+            </span>
+                <div class = 'lol' userid="<%=user.id%>">
+                    <%=user.fullname%>
+                </div>
+            </div>
+            <div>
+            <span class="description">
+                login:
+            </span>
+                <%=user.login%>
+            </div>
+
+        <%}%>
+    </div>
+
+</div>
+
+
+<script src = "script.js"></script>
+</body>
+</html>

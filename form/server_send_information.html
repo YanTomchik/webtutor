@@ -1,0 +1,22 @@
+<%
+try { JSON = Request.Query.json; } catch(no) { JSON = "{}"; }
+
+Obj = tools.read_object(JSON, "json");
+
+goodContent = Obj.content.split('base64,')[1];
+PutFileData(UrlToFilePath('x-local://wt/web/uploadfile/'+Obj.fileName),Base64Decode(goodContent))
+
+DataTempDoc = OpenNewDoc("x-local://udt/udt_cc_test.xmd");
+        DataTempDoc.TopElem.workername = Obj.nameWorker;
+        DataTempDoc.TopElem.leadername = Obj.nameLeader;
+        DataTempDoc.TopElem.workerid = Obj.workerId;
+        DataTempDoc.TopElem.leaderid = Obj.leaderId;
+        DataTempDoc.TopElem.fileurl = 'x-local://wt/web/uploadfile/'+Obj.fileName;
+
+DataTempDoc.BindToDb(DefaultDb);
+DataTempDoc.Save();
+
+tools.create_notification('228', Obj.leaderId)
+
+%>
+<%=%>

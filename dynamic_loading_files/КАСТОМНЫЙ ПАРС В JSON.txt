@@ -1,0 +1,9 @@
+SendString = "[";
+Counter = 0;
+for (node in _ARR_) { Counter++;
+GoodName = node.name+"";
+GoodName = GoodName.replace('"', "'");
+SendString += '"'+GoodName+'"';
+if (Counter< _ARR_.length) {  SendString+=",";   }
+}
+SendString+="]";

@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Form</title>
+    <link rel="stylesheet" href="style.css">
+    <script type="text/javascript" src="../scripts/jquery.js"></script>
+</head>
+<body>
+<div class="wrapper">
+    <h1 class="description">Запрос на автоматизацию и оптимазацию WebTutor</h1>
+    <div class="wrapper_search_worker">
+        <input type="text" class = "worker" id = "worker" placeholder="Работник" onkeyup="findWorker()">
+        <div id="result_worker" class="result_worker"></div>
+    </div>
+    <div class="wrapper_search_leader" id="wrapper_search_leader">
+        <input type="text" class = "leader" id = "leader" placeholder="Выберите кому отправлять" onkeyup="findLeader()">
+        <div id="result_leader" class="result_leader"></div>
+    </div>
+    <a href="#" class="link_to_download">Скачать документ для заполнения</a>
+    <form id="upload-container" method="POST" class="form_container">
+        <div>
+            <input id="file-input" type="file" name="file" multiple>
+            <label for="file-input">Выберите файл</label>
+        </div>
+    </form>
+    <button class="btn_to_submit">Отправить</button>
+</div>
+
+
+
+<script src="script.js"></script>
+</body>
+</html>

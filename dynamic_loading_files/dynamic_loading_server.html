@@ -1,0 +1,38 @@
+<%
+try { Current = Request.Query.current; Current = Int(Current); } catch(no) { Current = 0; }
+
+
+
+var count = 0;
+var STEP = 30;
+var LastNode = Current+STEP;
+
+fullArray = [];
+Doc = XQuery("for $elem in custom_web_templates  return $elem");
+for (file in Doc) { count++;
+    if (count >= Current && count < LastNode) {
+        good = String(file.name).replace('"', "'");
+        fullArray.push({"name":good});
+    }
+    if (count>LastNode) { break; }
+}
+/*
+partOfArray = [];
+for(var i = 0; i < startFrom; i++){
+    partOfArray[i] = fullArray[i];
+}
+*/
+//fullArray = tools.array_to_text(fullArray , "json");
+
+SendOBJ = {};
+    SendOBJ.current = LastNode;
+    SendOBJ.array = fullArray;
+
+ReturString = "";
+//ReturString = '{"current":"'+LastNode+'", "array" : "'+fullArray+'"}';
+
+ReturString = tools.object_to_text(SendOBJ, "json");
+%>
+<%=ReturString%>
+
+

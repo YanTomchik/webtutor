@@ -1,0 +1,13 @@
+<%
+GroupID = Request.Query.groupid;
+
+Members = XQuery("for $elem in group_collaborators where $elem/group_id = "+GroupID+" return $elem");
+
+for (group in Members) {
+%>
+<%=group.collaborator_fullname%>
+<%
+}
+
+%>
+<%=Members%>

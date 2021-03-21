@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Dynamic Loading File</title>
+    <link rel="stylesheet" href="dynamic_loading.css">
+    <script type="text/javascript" src="../scripts/jquery.js"></script>
+</head>
+<body>
+    <div class="wrapper">
+        <div class="description">
+            FILES
+        </div>
+        <%
+        array_of_files = XQuery("for $elem in custom_web_templates return $elem");
+
+        for (file in array_of_files) {
+        %>
+        <div class="files" id="files">
+<!--            <%=file.name%>-->
+        </div>
+        <%}
+        %>
+        <button id = "btn" >ХАЧУ ЕЩЕ!</button>
+    </div>
+<script src = "dynamic_loading.js"></script>
+</body>
+</html>

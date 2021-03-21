@@ -1,0 +1,25 @@
+body{
+    background-color: #2E8B57;
+    color: #FFFFFF;
+}
+.wrapper{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-auto-rows: 1fr 1fr;
+}
+.description{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.name{
+    font-weight: normal;
+    padding-bottom: 10px;
+    font-size: 20px;
+}
+
+.group_name{
+    font-weight: normal;
+    padding-bottom: 10px;
+    font-size: 20px;
+}

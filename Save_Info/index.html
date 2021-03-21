@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Save data</title>
+    <link rel="stylesheet" href="style.css">
+    <script type="text/javascript" src="../scripts/jquery.js"></script>
+</head>
+<body>
+    <div class="wrapper">
+        <div class="groups">
+            <h1 class="description">Группa</h1>
+            <%
+            lol_id = '6935674870865920548';
+            array_of_group = XQuery("for $elem in groups where $elem/id = "+lol_id+" return $elem");
+
+            for (group in array_of_group) {
+            %>
+            <div class="group_name" groupid="<%=group.id%>">
+                hgyftdsawserdtfyguhjilk
+<!--                <%=group.name%>-->
+            </div>
+            <%}%>
+        </div>
+        <div class="users">
+            <h1 class="description">Сотрудники</h1>
+            <%
+            array_of_users = XQuery("for $elem in collaborators return $elem");
+
+            for (user in array_of_users) {
+            %>
+            <div class="name" userid="<%=user.id%>">
+                <%=user.fullname%>
+                <img src="<%=user.pict_url%>">
+            </div>
+            <%}%>
+        </div>
+    </div>
+    <script src = "script.js"></script>
+</body>
+</html>

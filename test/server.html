@@ -1,0 +1,13 @@
+<%
+UserID = Request.Query.userid;
+
+BirthDate = XQuery("for $elem in collaborators where $elem/id = "+UserID+" return $elem");
+
+for (user in BirthDate) {
+%>
+<%=user.birth_date%>
+<%
+}
+
+%>
+<%=BirthDate%>
